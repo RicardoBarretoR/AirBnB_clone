@@ -1,11 +1,18 @@
 #!/usr/bin/python3
 """
-program called console.py that contains the
-entry point of the command interpreter
+program that contains the entry
+point of the command interpreter
 """
+
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenit
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -33,8 +40,12 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel, saves it and prints the id"""
-        allClass = ["BaseModel"]
+        """
+        Creates a new instance of BaseModel,
+        saves it and prints the id
+        """
+        allClass = ["BaseModel", "User", "State",
+                    "City", "Amenity", "Place", "Review"]
         entry_arg = arg.split()
         if len(entry_arg) == 0:
             print("** class name missing **")
@@ -49,10 +60,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-        Prints the str representation of an instance
-        based on the class name and id
+        Prints the str representation of an
+        instancebased on the class name and id
         """
-        allClass = ["BaseModel"]
+        allClass = ["BaseModel", "User", "State",
+                    "City", "Amenity", "Place", "Review"]
         entry_arg = arg.split()
         all_objs = storage.all()
         if len(entry_arg) == 0:
@@ -73,7 +85,8 @@ class HBNBCommand(cmd.Cmd):
         """
         Deletes an instance based on the class name and id
         """
-        allClass = ["BaseModel"]
+        allClass = ["BaseModel", "User", "State",
+                    "City", "Amenity", "Place", "Review"]
         entry_arg = arg.split()
         all_objs = storage.all()
         if len(entry_arg) == 0:
@@ -94,10 +107,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Prints all string representation of all instances
-        based or not on the class name.
+        Prints all string representation of all
+        instances based or not on the class name.
         """
-        allClass = ["BaseModel"]
+        allClass = ["BaseModel", "User", "State",
+                    "City", "Amenity", "Place", "Review"]
         entry_arg = arg.split()
         all_objs = storage.all()
         list_ins = []
@@ -114,7 +128,8 @@ class HBNBCommand(cmd.Cmd):
                 pass
 
     def do_update(self, arg):
-        allClass = ["BaseModel"]
+        allClass = ["BaseModel", "User", "State",
+                    "City", "Amenity", "Place", "Review"]
         entry_arg = arg.split()
         all_objs = storage.all()
         if len(entry_arg) == 0:
