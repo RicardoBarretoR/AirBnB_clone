@@ -10,7 +10,7 @@ from models import storage
 from models.user import User
 from models.state import State
 from models.city import City
-from models.amenity import Amenit
+from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
@@ -53,6 +53,18 @@ class HBNBCommand(cmd.Cmd):
             if entry_arg[0] in allClass:
                 if entry_arg[0] == "BaseModel":
                     new_inst = BaseModel()
+                if entry_arg[0] == "User":
+                    new_inst = User()
+                if entry_arg[0] == "State":
+                    new_inst = State()
+                if entry_arg[0] == "City":
+                    new_inst = City()
+                if entry_arg[0] == "Amenity":
+                    new_inst = Amenity()
+                if entry_arg[0] == "Place":
+                    new_inst = Place()
+                if entry_arg[0] == "Review":
+                    new_inst = Review()
                     new_inst.save()
                     print(new_inst.id)
             else:
@@ -128,6 +140,10 @@ class HBNBCommand(cmd.Cmd):
                 pass
 
     def do_update(self, arg):
+        """
+        Updates an instance based on the class name and id
+        by adding or updating attribute
+        """
         allClass = ["BaseModel", "User", "State",
                     "City", "Amenity", "Place", "Review"]
         entry_arg = arg.split()
