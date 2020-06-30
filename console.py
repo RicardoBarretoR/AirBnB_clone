@@ -5,6 +5,7 @@ point of the command interpreter
 """
 
 import cmd
+import json
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -18,6 +19,8 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """class definition"""
     prompt = "(hbnb) "
+    allClass = ["BaseModel", "User", "State",
+                "City", "Amenity", "Place", "Review"]
 
     def do_quit(self, arg):
         """to exit the program"""
@@ -65,8 +68,8 @@ class HBNBCommand(cmd.Cmd):
                     new_inst = Place()
                 if entry_arg[0] == "Review":
                     new_inst = Review()
-                    new_inst.save()
-                    print(new_inst.id)
+                new_inst.save()
+                print(new_inst.id)
             else:
                 print("** class doesn't exist **")
 
@@ -81,17 +84,16 @@ class HBNBCommand(cmd.Cmd):
         all_objs = storage.all()
         if len(entry_arg) == 0:
             print("** class name missing **")
-        elif entry_arg[0] not in allClass:
+        elif entry_arg[0] not in self.allClass:
             print("** class doesn't exist **")
         elif len(entry_arg) == 1:
             print("** instance id missing **")
         else:
-            try:
-                for k in all_objs.keys():
-                    if obj.id == entry_arg[0] and entry_arg[1] in keys:
-                        print("{}.{}".format(type(obj).__name__, obj.id))
-            except:
-                    print("** no instance found **")
+            inst = entry_arg[0] + "." + entry_arg[1]
+            if inst in all_objs:
+                print(all_objs[inst])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """
@@ -109,10 +111,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             try:
-                for k in all_objs.keys():
-                    if obj.id == entry_arg[0] and entry_arg[1] in keys:
-                        inst = ("{}.{}".format(type(obj).__name__, obj.id))
-                        del all_objs[inst]
+                inst = ("{}.{}".format(entry_arg[0], entry_arg[1]))
+                for inst in all_objs:
+                    del all_objs[inst]
                     storage.save()
             except:
                     print("** no instance found **")
@@ -127,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
         entry_arg = arg.split()
         all_objs = storage.all()
         list_ins = []
-        if entry_arg[0] not in allClass:
+        if entry_arg[0] not in self.allClass:
             print("** class doesn't exist **")
         else:
             try:
@@ -135,8 +136,7 @@ class HBNBCommand(cmd.Cmd):
                     inst_str = str(all_objs[instance])
                     list_ins.append(inst_str)
                     print(list_ins)
-                    break
-            except e:
+            except:
                 pass
 
     def do_update(self, arg):
@@ -161,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             inst = ("{}.{}".format(entry_arg[0], entry_arg[1]))
             if inst in all_objs:
-                setattr(all_objs, entry_arg[2], entry_arg[3])
+                setattr(all_objs[inst], entry_arg[2], entry_arg[3])
                 storage.save()
             else:
                 print("** no instance found **")
