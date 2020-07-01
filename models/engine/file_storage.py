@@ -11,7 +11,7 @@ from models.review import Review
 
 
 class FileStorage:
-    """ """
+    """serialization-deserialization """
     __file_path = "file.json"
     __objects = {}
 
@@ -41,7 +41,7 @@ class FileStorage:
         obj = {}
         filename = FileStorage.__file_path
         try:
-            with open(filename, encoding='UTF-8') as f:
+            with open(filename, "r", encoding='UTF-8') as f:
                 obj = json.load(f)
                 for key, value in obj.items():
                     FileStorage.__objects[key] = eval(
