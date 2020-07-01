@@ -2,7 +2,7 @@
 """tests FileStorage class"""
 
 from models.engine.file_storage import FileStorage
-from models import Storage
+from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
@@ -25,12 +25,12 @@ class FileStorage(unittest.TestCase):
         self.assertEqual(result.total_errors, 0)
 
     def Test_FileStorage(self):
-        """check for methods"""
+        """check for attributes"""
         self.assertTrue(FileStorage.__file_path.__doc__)
         self.assertTrue(FileStorage.__objects.__doc__)
 
     def test_all(self):
-        """check for"""
+        """check for returns the dictionary __objects"""
         pass
 
     def test_new(self):
