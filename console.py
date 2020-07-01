@@ -110,13 +110,12 @@ class HBNBCommand(cmd.Cmd):
         elif len(entry_arg) == 1:
             print("** instance id missing **")
         else:
-            try:
-                inst = ("{}.{}".format(entry_arg[0], entry_arg[1]))
-                for inst in all_objs:
-                    del all_objs[inst]
-                    storage.save()
-            except:
-                    print("** no instance found **")
+            inst = ("{}.{}".format(entry_arg[0], entry_arg[1]))
+            if inst in all_objs:
+                del all_objs[inst]
+                storage.save()
+            else:
+                print("** no instance found **")
 
     def do_all(self, arg):
         """
