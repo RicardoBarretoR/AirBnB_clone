@@ -4,6 +4,7 @@
 from models.base_model import BaseModel
 from datetime import datetime
 import unittest
+import json
 import pep8
 
 
@@ -23,17 +24,24 @@ class BaseModel_Tests(unittest.TestCase):
         self.assertTrue(BaseModel.save.__doc__)
         self.assertTrue(BaseModel.to_dict.__doc__)
 
-    def Test_BaseModel_init_(self):
-        """check for init method"""
+    def Test_BaseModel_Clss(self):
+        """check for subclass of Superclass"""
         my_model = BaseModel()
         self.assertTrue(my_model, "__class__")
         self.assertTrue(my_model, "id")
         self.assertTrue(my_model, "created_at")
         self.assertTrue(my_model, "updated_at")
 
-    def Test_BaseModel_str_(self):
-        """check for representation string"""
-        pass
+    def Test_BaseModel_str_cls(self):
+        """check for representation string for class"""
+        my_model = BaseModel()
+        self.assertEqual("[BaseModel]" in str(my_model), true)
+        my_model = BaseModel()
+        self.assertEqual("id" in str(my_model), true)
+        my_model = BaseModel()
+        self.assertEqual("created_at" in str(my_model), true)
+        my_model = BaseModel()
+        self.assertEqual("updated_at" in str(my_model), true)
 
     def Test_BaseModel_save(self):
         """check for update_at with the current datetime"""

@@ -1,6 +1,7 @@
 """tests for City class"""
 
 from models.city import City
+from models.base_model import BaseModel
 import unittest
 import json
 import pep8
@@ -20,8 +21,17 @@ class City_Tests(unittest.TestCase):
         self.assertTrue(City.__doc__)
 
     def test_set_attr(self):
-        """check for the public class attributes"""
-        self.assertTrue(hasattr(City, "__init__"))
-        self.assertTrue(hasattr(City, "created_at"))
-        self.assertTrue(hasattr(City, "updated_at"))
-        self.assertTrue(hasattr(City, "id"))
+        """check for public class attributes"""
+        self.city = City()
+        self.assertIsInstance(self.city, BaseModel)
+        self.assertTrue(hasattr(self.city, "created_at"))
+        self.assertTrue(hasattr(self.city, "updated_at"))
+        self.assertTrue(hasattr(self.city, "id"))
+
+    def test_user_attributes(self):
+        """"""
+        self.city = City()
+        self.assertTrue(hasattr(self.city, "state_id"))
+        self.assertEqual(self.city.state_id, "")
+        self.assertTrue(hasattr(self.city, "name"))
+        self.assertEqual(self.city.name, "")
