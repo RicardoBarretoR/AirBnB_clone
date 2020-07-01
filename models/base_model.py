@@ -8,7 +8,7 @@ import uuid
 class BaseModel:
     """class base"""
     def __init__(self, *args, **kwargs):
-        """"""
+        """initializer method"""
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -22,7 +22,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """Return a srting representation"""
+        """Return a string representation"""
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
