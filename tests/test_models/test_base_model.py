@@ -54,3 +54,10 @@ class BaseModel_Tests(unittest.TestCase):
         my_model = BaseModel()
         new = self.my_model.to_dict()
         self.asserTrue("to_dict" in dir(self.my_model))
+
+    def test_BaseModel_id(self):
+        """checks for id"""
+        my_model = BaseModel()
+        my_model.name = "Holberton"
+        my_model.my_number = 89
+        self.assertEqual(type(my_model.id), str)
