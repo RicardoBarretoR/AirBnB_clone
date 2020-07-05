@@ -16,16 +16,16 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        """Public instance method"""
+        """returns the dictionary __objects"""
         return FileStorage.__objects
 
     def new(self, obj):
-        """sets objects in dictionary"""
+        """sets objects in dictionary with key <obj class name>.id"""
         key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """ serializes __objects to the JSON file"""
+        """serializes __objects to the JSON file"""
         new = {}
         filename = FileStorage.__file_path
         for key, obj in FileStorage.__objects.items():
@@ -34,10 +34,7 @@ class FileStorage:
             f.write(json.dumps(new))
 
     def reload(self):
-        """
-        deserializes the JSON file
-        if os.path.isfile(self.__file_path) is True:
-        """
+        """deserializes the JSON file to __objects"""
         obj = {}
         filename = FileStorage.__file_path
         try:
